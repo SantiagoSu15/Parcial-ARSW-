@@ -6,6 +6,8 @@ public class countDigits extends Thread{
     private int a;
     private int cantidad;
 
+    private byte[] digits;
+
     public countDigits(int a, int b,Object lock){
         this.a = a;
         this.cantidad= b;
@@ -16,6 +18,7 @@ public class countDigits extends Thread{
 
     @Override
     public void run(){
+        System.out.println("Inicio: " + this.a + " Mi tamaño: " + this.cantidad);
         contar();
 
 //        synchronized(lock){
@@ -30,11 +33,14 @@ public class countDigits extends Thread{
     }
 
     public void contar(){
-        PiDigits.getDigits2(a,cantidad);
+        this.digits = PiDigits.getDigits2(a,cantidad);
     }
 
     public void setIntervalo(int a, int b){
         this.a = a;
         this.cantidad = b;
+    }
+    public byte[] getDigits(){
+        return  this.digits;
     }
 }

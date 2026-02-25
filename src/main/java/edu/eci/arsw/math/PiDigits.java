@@ -26,8 +26,8 @@ public class PiDigits {
         int fin = tamaño;
         for(countDigits c : lista){
             c.setIntervalo(inicio,tamaño);
-            inicio+=tamaño;
-            fin+=tamaño;
+            inicio+=fin;
+            fin+=tamaño+1;
         }
     }
 
