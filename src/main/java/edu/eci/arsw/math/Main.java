@@ -13,10 +13,17 @@ import java.util.Arrays;
  */
 public class Main {
 
-    public static void main(String a[]) {
-        System.out.println(bytesToHex(PiDigits.getDigits(0, 10)));
-        System.out.println(bytesToHex(PiDigits.getDigits(1, 100)));
-        System.out.println(bytesToHex(PiDigits.getDigits(1, 1000000)));
+    public static void main(String a[]) throws InterruptedException {
+        System.out.println(bytesToHex(PiDigits.getDigits(0, 10,3)));
+        //System.out.println(bytesToHex(PiDigits.getDigits(1, 100,3)));
+        //System.out.println(bytesToHex(PiDigits.getDigits(1, 1000000,3)));
+
+//        243F6A8885
+//        43F6A8885A308D313198A2E03707344A4093822299F31D0082EFA98EC4E6C89452821E638D01377BE5466CF34E90C6CC0AC2
+        System.out.println(bytesToHex(PiDigits.getDigits2(0, 10)));
+        System.out.println(bytesToHex(PiDigits.getDigits2(1, 100)));
+
+
     }
 
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
