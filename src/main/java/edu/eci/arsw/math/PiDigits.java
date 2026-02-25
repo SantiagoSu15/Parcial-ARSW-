@@ -1,5 +1,6 @@
 package edu.eci.arsw.math;
 
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -11,12 +12,13 @@ import java.util.ArrayList;
 ///  </summary>
 public class PiDigits {
 
-    private static int DigitsPerSum = 8;
+    public static int DigitsPerSum = 8;
     private static double Epsilon = 1e-17;
+    private static Object lock = new Object();
     private static ArrayList<countDigits> hilos = new ArrayList<>();
     public static void crearHilos(int num){
         for(int i = 0;i<num;i++){
-            countDigits c = new countDigits();
+            countDigits c = new countDigits(lock);
             hilos.add(c);
         }
     }
@@ -57,24 +59,18 @@ public class PiDigits {
             h.join();
         }
 
-
-
         byte[] digits = new byte[count];
-        double sum = 0;
 
-        for (int i = 0; i < count; i++) {
-            if (i % DigitsPerSum == 0) {
-                sum = 4 * sum(1, start)
-                        - 2 * sum(4, start)
-                        - sum(5, start)
-                        - sum(6, start);
-
-                start += DigitsPerSum;
-            }
-
-            sum = 16 * (sum - Math.floor(sum));
-            digits[i] = (byte) sum;
+        ArrayList<byte[]> bList = new ArrayList<>();
+        for(countDigits h2 : hilos){
+            bList.add(h2.getDigits());
+//            for(int i = h2.getA();i<h2.getCantidad();i++){
+//                digits[i] =
+//            }
         }
+
+
+
 
         return digits;
     }
@@ -119,7 +115,7 @@ public class PiDigits {
     /// <param name="m"></param>
     /// <param name="n"></param>
     /// <returns></returns>
-    private static double sum(int m, int n) {
+    public static double sum(int m, int n) {
         double sum = 0;
         int d = m;
         int power = n;
