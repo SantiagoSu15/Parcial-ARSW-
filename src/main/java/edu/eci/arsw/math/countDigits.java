@@ -8,7 +8,7 @@ import static edu.eci.arsw.math.PiDigits.sum;
 
 public class countDigits extends Thread{
     private int espera = 5000;
-    private Object lock;
+    private final Object lock;
     private int a;
     private int cantidad;
 
@@ -32,7 +32,6 @@ public class countDigits extends Thread{
             try{
                 contar();
                 this.sleep(espera);
-                System.out.println(this.getDigits());
             }catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -49,10 +48,16 @@ public class countDigits extends Thread{
 //            }
 //        }
     }
-
+    public void pausar() throws InterruptedException {
+        this.wait();
+    }
     public void contar(){
-        this.digits = PiDigits.getDigits2(a,cantidad);
-        System.out.println(bytesToHex(this.digits));
+        synchronized (lock){
+            this.digits = PiDigits.getDigits2(a,cantidad);
+            System.out.println(bytesToHex(this.digits));
+        }
+
+
     }
 
     public void contar2(){
