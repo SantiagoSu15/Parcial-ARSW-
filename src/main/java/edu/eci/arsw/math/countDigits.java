@@ -28,13 +28,16 @@ public class countDigits extends Thread{
 
     @Override
     public void run(){
-        try{
-            contar();
-            this.sleep(espera);
-            System.out.println(this.getDigits());
-        }catch (InterruptedException e) {
-          throw new RuntimeException(e);
+        synchronized (lock){
+            try{
+                contar();
+                this.sleep(espera);
+                System.out.println(this.getDigits());
+            }catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
+
 
 //        synchronized(lock){
 //            while(true){

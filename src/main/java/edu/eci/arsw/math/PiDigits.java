@@ -106,6 +106,11 @@ public class PiDigits {
     }
 
 
+    public void despertar(){
+        for(countDigits h : hilos){
+            lock.notifyAll();
+        }
+    }
 
 
 
