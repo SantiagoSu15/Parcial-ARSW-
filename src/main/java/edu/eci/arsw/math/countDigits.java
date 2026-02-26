@@ -15,6 +15,7 @@ public class countDigits extends Thread{
     private byte[] digits;
     private byte[] miniDigits;
 
+    public boolean banderita = true;
     public countDigits(int a, int b,Object lock){
         this.a = a;
         this.cantidad= b;
@@ -53,8 +54,12 @@ public class countDigits extends Thread{
     }
     public void contar(){
         synchronized (lock){
+//            while (banderita){
+//
+//            }
             this.digits = PiDigits.getDigits2(a,cantidad);
             System.out.println(bytesToHex(this.digits));
+
         }
 
 
@@ -62,7 +67,9 @@ public class countDigits extends Thread{
 
     public void contar2(){
         double sum = 0;
-
+        if(this.miniDigits == null){
+            this.miniDigits = new byte[this.cantidad];
+        }
         for (int i = 0; i < cantidad; i++) {
             if (i % DigitsPerSum == 0) {
                 sum = 4 * sum(1, a)
@@ -95,5 +102,8 @@ public class countDigits extends Thread{
 
     public int getCantidad(){
         return  this.cantidad;
+    }
+    public void setBanderita(boolean t){
+        this.banderita = t;
     }
 }

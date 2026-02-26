@@ -105,7 +105,11 @@ public class PiDigits {
         return digits;
     }
 
-
+    public void dormir(){
+        for(countDigits h : hilos){
+            h.setBanderita(false);
+        }
+    }
     public void despertar(){
         for(countDigits h : hilos){
             lock.notifyAll();
